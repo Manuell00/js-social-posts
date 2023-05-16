@@ -59,63 +59,116 @@ const posts = [
 
 // VARIABILI
 const container = document.getElementById("container")
+let button = document.getElementsByClassName("like-button.")
 
 
 // Ciclo all'interno dell'array
 posts.forEach(element => {
 
+    // Dicharo la variabile scheda
+    let scheda = ""
+
     // Destrutturo 
     let { id, content, media, author, likes, created } = element
 
-    // Creo la variabile scheda con al suo interno il codice di una singola scheda che varierà ad ogni ciclo sull'array
-
-    let scheda = `
-    <div class="post">
-    <div class="post__header">
-        <div class="post-meta">                    
-            <div class="post-meta__icon">
-
-                <!-- IMMAGINE (IMAGE AUTHOR) -->
-                <img class="profile-pic" src="${author.image}" alt="Phil Mangione">                    
-            </div>
-            <div class="post-meta__data">
-
-                <!-- NAME AUTHOR -->
-                <div class="post-meta__author">${author.name}</div>
-
-                <!-- CREATED -->
-                <div class="post-meta__time">${created}</div>
-            </div>                    
-        </div>
-    </div>
-
-    <!-- CONTENT -->
-    <div class="post__text">${content}</div>
-    <div class="post__image">
-
-        <!-- MEDIA -->
-        <img src="${media}" alt="">
-    </div>
-    <div class="post__footer">
-        <div class="likes js-likes">
-            <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
-                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                    <span class="like-button__label">Mi Piace</span>
-                </a>
-            </div>
-            <div class="likes__counter">
-                Piace a <b id="like-counter-1"
-                class="js-likes-counter">
-                <!-- NUMERO LIKES -->
-                ${likes}</b> persone
-            </div>
-        </div> 
-    </div>            
-</div>
+    // Verifico se author.image presente o meno
+    if (author.image != null) {
+        scheda = `
+        <div class="post">
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
     
-    `
+                    <!-- IMMAGINE (IMAGE AUTHOR) -->
+                    <img class="profile-pic" src="${author.image}" alt="Phil Mangione">                    
+                </div>
+                <div class="post-meta__data">
+    
+                    <!-- NAME AUTHOR -->
+                    <div class="post-meta__author">${author.name}</div>
+    
+                    <!-- CREATED -->
+                    <div class="post-meta__time">${created}</div>
+                </div>                    
+            </div>
+        </div>
+    
+        <!-- CONTENT -->
+        <div class="post__text">${content}</div>
+        <div class="post__image">
+    
+            <!-- MEDIA -->
+            <img src="${media}" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="${id}">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-1"
+                    class="js-likes-counter">
+                    <!-- NUMERO LIKES -->
+                    ${likes}</b> persone
+                </div>
+            </div> 
+        </div>            
+    </div>`
+    }
 
-// Ad ogni ciclo appendo la scheda al container 
-container.innerHTML += scheda
+    else {
+        scheda = `
+        <div class="post">
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+    
+                    <!-- IMMAGINE (IMAGE AUTHOR) -->
+                    <img class="profile-pic" src="#" alt="Phil Mangione">                    
+                </div>
+                <div class="post-meta__data">
+    
+                    <!-- NAME AUTHOR -->
+                    <div class="post-meta__author">${author.name}</div>
+    
+                    <!-- CREATED -->
+                    <div class="post-meta__time">${created}</div>
+                </div>                    
+            </div>
+        </div>
+    
+        <!-- CONTENT -->
+        <div class="post__text">${content}</div>
+        <div class="post__image">
+    
+            <!-- MEDIA -->
+            <img src="${media}" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="${id}">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-1"
+                    class="js-likes-counter">
+                    <!-- NUMERO LIKES -->
+                    ${likes}</b> persone
+                </div>
+            </div> 
+        </div>            
+    </div>`
+    }
+
+    // Ad ogni ciclo appendo la scheda al container 
+    container.innerHTML += scheda
 });
+
+
+
