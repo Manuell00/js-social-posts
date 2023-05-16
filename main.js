@@ -59,21 +59,36 @@ const posts = [
 
 // VARIABILI
 const container = document.getElementById("container")
-let button = document.getElementsByClassName("like-button.")
+
+// Richiamo la funzione creazioneSchede
+creazioneSchede()
 
 
-// Ciclo all'interno dell'array
-posts.forEach(element => {
+let button = document.querySelectorAll(".like-button")
 
-    // Dicharo la variabile scheda
-    let scheda = ""
+for (let i = 0; i < button.length; i++) {
+    button[i].addEventListener("click", function () {
+        button[i].classList.add("likeClick")
+        posts[i].likes = parseInt(posts[i].likes) + 1;
+    })
 
-    // Destrutturo 
-    let { id, content, media, author, likes, created } = element
+}
 
-    // Verifico se author.image presente o meno
-    if (author.image != null) {
-        scheda = `
+// FUNZIONI UTILI
+function creazioneSchede() {
+
+    // Ciclo all'interno dell'array
+    posts.forEach(element => {
+
+        // Dicharo la variabile scheda
+        let scheda = ""
+
+        // Destrutturo 
+        let { id, content, media, author, likes, created } = element
+
+        // Verifico se author.image presente o meno
+        if (author.image != null) {
+            scheda = `
         <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
@@ -117,10 +132,10 @@ posts.forEach(element => {
             </div> 
         </div>            
     </div>`
-    }
+        }
 
-    else {
-        scheda = `
+        else {
+            scheda = `
         <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
@@ -164,11 +179,9 @@ posts.forEach(element => {
             </div> 
         </div>            
     </div>`
-    }
+        }
 
-    // Ad ogni ciclo appendo la scheda al container 
-    container.innerHTML += scheda
-});
-
-
-
+        // Ad ogni ciclo appendo la scheda al container 
+        container.innerHTML += scheda
+    });
+}
