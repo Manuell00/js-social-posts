@@ -1,6 +1,6 @@
 const posts = [
     {
-        "id": 1,
+        "id": 0,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/300?image=171",
         "author": {
@@ -11,7 +11,7 @@ const posts = [
         "created": "2021-06-25"
     },
     {
-        "id": 2,
+        "id": 1,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=112",
         "author": {
@@ -22,7 +22,7 @@ const posts = [
         "created": "2021-09-03"
     },
     {
-        "id": 3,
+        "id": 2,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=234",
         "author": {
@@ -33,7 +33,7 @@ const posts = [
         "created": "2021-05-15"
     },
     {
-        "id": 4,
+        "id": 3,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
@@ -44,7 +44,7 @@ const posts = [
         "created": "2021-04-03"
     },
     {
-        "id": 5,
+        "id": 4,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=534",
         "author": {
@@ -60,16 +60,32 @@ const posts = [
 // VARIABILI
 const container = document.getElementById("container")
 
+
 // Richiamo la funzione creazioneSchede
 creazioneSchede()
 
-
+// Seleziono tutti gli elementi con classe .like-button, avrò quindi un array
 let button = document.querySelectorAll(".like-button")
 
-for (let i = 0; i < button.length; i++) {
+// In questo array faccio un for per poterli analizzare tutti al click
+for (let i = 0; i < (button.length); i++) {
+
+    // Creo l'evento al click
     button[i].addEventListener("click", function () {
+        let likesCounter = document.getElementById(`like-counter-${i}`);
+
+        // Coloro la cella di blu
         button[i].classList.add("likeClick")
-        posts[i].likes = parseInt(posts[i].likes) + 1;
+
+        // Aggiungo 1 likes
+        let numeroLikes = parseInt(likesCounter.textContent)
+
+        // Stampo nell'id selezionato
+        likesCounter.innerHTML = numeroLikes+1
+
+        // Aumento il valore dell'elemento 
+        posts[i].likes++
+
     })
 
 }
@@ -124,7 +140,7 @@ function creazioneSchede() {
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1"
+                    Piace a <b id="like-counter-${id}"
                     class="js-likes-counter">
                     <!-- NUMERO LIKES -->
                     ${likes}</b> persone
@@ -171,7 +187,7 @@ function creazioneSchede() {
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1"
+                    Piace a <b id="like-counter-${id}"
                     class="js-likes-counter">
                     <!-- NUMERO LIKES -->
                     ${likes}</b> persone
@@ -185,3 +201,4 @@ function creazioneSchede() {
         container.innerHTML += scheda
     });
 }
+
