@@ -76,6 +76,7 @@ h1 {
     width: 60px;
     overflow: hidden;
     border-radius: 50%;
+    font-weight: 700;
 }
 
 .profile-pic-default span {
@@ -122,8 +123,4 @@ h1 {
 .like-button--liked {
     color: #0CD977;
     cursor: default;
-}
-
-.likeClick{
-    background-color: dodgerblue;
 }

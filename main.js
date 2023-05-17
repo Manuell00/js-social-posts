@@ -62,8 +62,9 @@ const posts = [
 const container = document.getElementById("container")
 
 
-// Richiamo la funzione creazioneSchede
+// Richiamo la funzione creazioneSchede e la funzione stampaIniziali
 creazioneSchede()
+stampaIniziali()
 
 // Seleziono tutti gli elementi con classe .like-button, avrò quindi una nodelist
 let button = document.querySelectorAll(".like-button")
@@ -77,10 +78,10 @@ for (let i = 0; i < (button.length); i++) {
         let likesCounter = document.getElementById(`like-counter-${i}`);
 
         // CASO GIÀ CLICCATO
-        if (button[i].classList.contains("likeClick")) {
+        if (button[i].classList.contains("like-button--liked")) {
 
             // Deoloro la cella di blu
-            button[i].classList.remove("likeClick")
+            button[i].classList.remove("like-button--liked")
 
             // Aggiungo 1 likes
             let numeroLikes = parseInt(likesCounter.textContent)
@@ -97,7 +98,7 @@ for (let i = 0; i < (button.length); i++) {
         else {
 
             // Coloro la cella di blu
-            button[i].classList.add("likeClick")
+            button[i].classList.add("like-button--liked")
 
             // Aggiungo 1 likes
             let numeroLikes = parseInt(likesCounter.textContent)
@@ -178,7 +179,7 @@ function creazioneSchede() {
         </div>            
     </div>`
         }
-        
+
         // CASO IN CUI NON ABBIAMO IMG
         else {
             scheda = `
@@ -188,7 +189,7 @@ function creazioneSchede() {
                 <div class="post-meta__icon">
     
                     <!-- IMMAGINE (IMAGE AUTHOR) -->
-                    <img class="profile-pic" src="#" alt="Phil Mangione">                    
+                   <span class="profile-pic-default"></span>                   
                 </div>
                 <div class="post-meta__data">
     
@@ -249,3 +250,25 @@ function timeAgo(value) {
     if (interval > 1) { return rtf.format(-Math.floor(interval), 'minute') }
     return rtf.format(-Math.floor(interval), 'second')
 }
+
+// FUNZIONE PER STAMPARE INIZIALI
+function stampaIniziali() {
+    // Ciclo all'interno dell'array
+    posts.forEach(element => {
+
+        // Destrutturo 
+        let { author } = element
+
+        if (author.image == null) {
+            let profilo = document.querySelector(".profile-pic-default")
+
+            // Ricavo solo le lettere maiuscole da author.name
+            const onlyUpper1 = (author.name).replace(/[a-z]/g, '');
+
+            // Faccio un inner HTML nel profilo senza foto
+            profilo.innerHTML = onlyUpper1
+        }
+
+    })
+}
+
