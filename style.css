@@ -124,3 +124,15 @@ h1 {
     color: #0CD977;
     cursor: default;
 }
+
+
+/* Inserimento scroll-bar modificata */
+/* Inserimento di una scroll-bar personalizzata anche se non richesto :) */
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(transparent,#0cd977);
+    border-radius: 4px;
+}
