@@ -1,3 +1,4 @@
+// ARRAY DI OGGETTI
 const posts = [
     {
         "id": 0,
@@ -64,16 +65,18 @@ const container = document.getElementById("container")
 // Richiamo la funzione creazioneSchede
 creazioneSchede()
 
-// Seleziono tutti gli elementi con classe .like-button, avrò quindi un array
+// Seleziono tutti gli elementi con classe .like-button, avrò quindi una nodelist
 let button = document.querySelectorAll(".like-button")
 
-// In questo array faccio un for per poterli analizzare tutti al click
+
+// EVENTO AL CLICK
 for (let i = 0; i < (button.length); i++) {
 
     // Creo l'evento al click
     button[i].addEventListener("click", function (event) {
         let likesCounter = document.getElementById(`like-counter-${i}`);
 
+        // CASO GIÀ CLICCATO
         if (button[i].classList.contains("likeClick")) {
 
             // Deoloro la cella di blu
@@ -90,6 +93,7 @@ for (let i = 0; i < (button.length); i++) {
 
         }
 
+        // CASO DA CLICCARE
         else {
 
             // Coloro la cella di blu
@@ -127,7 +131,7 @@ function creazioneSchede() {
         // Destrutturo 
         let { id, content, media, author, likes, created } = element
 
-        // Verifico se author.image presente o meno
+        // CASO IN CUI ABBIAMO IMG
         if (author.image != null) {
             scheda = `
         <div class="post">
@@ -174,7 +178,8 @@ function creazioneSchede() {
         </div>            
     </div>`
         }
-
+        
+        // CASO IN CUI NON ABBIAMO IMG
         else {
             scheda = `
         <div class="post">
@@ -229,7 +234,7 @@ function creazioneSchede() {
 
 
 // FUNZIONE PER CONTARE IL TEMPO PASSATO
-function timeAgo (value) {
+function timeAgo(value) {
     const seconds = Math.floor((new Date().getTime() - new Date(value).getTime()) / 1000)
     let interval = seconds / 31536000
     const rtf = new Intl.RelativeTimeFormat("en", { numeric: 'auto' })
