@@ -71,8 +71,11 @@ let button = document.querySelectorAll(".like-button")
 for (let i = 0; i < (button.length); i++) {
 
     // Creo l'evento al click
-    button[i].addEventListener("click", function () {
+    button[i].addEventListener("click", function (event) {
         let likesCounter = document.getElementById(`like-counter-${i}`);
+
+        // Rimuovo il comportamento di Default
+        event.preventDefault()
 
         // Coloro la cella di blu
         button[i].classList.add("likeClick")
