@@ -74,20 +74,39 @@ for (let i = 0; i < (button.length); i++) {
     button[i].addEventListener("click", function (event) {
         let likesCounter = document.getElementById(`like-counter-${i}`);
 
+        if (button[i].classList.contains("likeClick")) {
+
+            // Deoloro la cella di blu
+            button[i].classList.remove("likeClick")
+
+            // Aggiungo 1 likes
+            let numeroLikes = parseInt(likesCounter.textContent)
+
+            // Stampo nell'id selezionato
+            likesCounter.innerHTML = numeroLikes - 1
+
+            // Aumento il valore dell'elemento 
+            posts[i].likes--
+
+        }
+
+        else {
+
+            // Coloro la cella di blu
+            button[i].classList.add("likeClick")
+
+            // Aggiungo 1 likes
+            let numeroLikes = parseInt(likesCounter.textContent)
+
+            // Stampo nell'id selezionato
+            likesCounter.innerHTML = numeroLikes + 1
+
+            // Aumento il valore dell'elemento 
+            posts[i].likes++
+        }
+
         // Rimuovo il comportamento di Default
         event.preventDefault()
-
-        // Coloro la cella di blu
-        button[i].classList.add("likeClick")
-
-        // Aggiungo 1 likes
-        let numeroLikes = parseInt(likesCounter.textContent)
-
-        // Stampo nell'id selezionato
-        likesCounter.innerHTML = numeroLikes+1
-
-        // Aumento il valore dell'elemento 
-        posts[i].likes++
 
     })
 
