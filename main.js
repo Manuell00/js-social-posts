@@ -19,7 +19,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "2021-09-03"
+        "created": "2022-09-03"
     },
     {
         "id": 2,
@@ -41,7 +41,7 @@ const posts = [
             "image": null
         },
         "likes": 56,
-        "created": "2021-04-03"
+        "created": "2023-04-03"
     },
     {
         "id": 4,
@@ -112,7 +112,10 @@ for (let i = 0; i < (button.length); i++) {
 
 }
 
+
 // FUNZIONI UTILI
+
+// FUNZIONE PER CREARE LE SCHEDE
 function creazioneSchede() {
 
     // Ciclo all'interno dell'array
@@ -141,7 +144,7 @@ function creazioneSchede() {
                     <div class="post-meta__author">${author.name}</div>
     
                     <!-- CREATED -->
-                    <div class="post-meta__time">${created}</div>
+                    <div class="post-meta__time">${timeAgo(created)}</div>
                 </div>                    
             </div>
         </div>
@@ -188,7 +191,7 @@ function creazioneSchede() {
                     <div class="post-meta__author">${author.name}</div>
     
                     <!-- CREATED -->
-                    <div class="post-meta__time">${created}</div>
+                    <div class="post-meta__time">${timeAgo(created)}</div>
                 </div>                    
             </div>
         </div>
@@ -224,3 +227,20 @@ function creazioneSchede() {
     });
 }
 
+
+// FUNZIONE PER CONTARE IL TEMPO PASSATO
+function timeAgo (value) {
+    const seconds = Math.floor((new Date().getTime() - new Date(value).getTime()) / 1000)
+    let interval = seconds / 31536000
+    const rtf = new Intl.RelativeTimeFormat("en", { numeric: 'auto' })
+    if (interval > 1) { return rtf.format(-Math.floor(interval), 'year') }
+    interval = seconds / 2592000
+    if (interval > 1) { return rtf.format(-Math.floor(interval), 'month') }
+    interval = seconds / 86400
+    if (interval > 1) { return rtf.format(-Math.floor(interval), 'day') }
+    interval = seconds / 3600
+    if (interval > 1) { return rtf.format(-Math.floor(interval), 'hour') }
+    interval = seconds / 60
+    if (interval > 1) { return rtf.format(-Math.floor(interval), 'minute') }
+    return rtf.format(-Math.floor(interval), 'second')
+}
